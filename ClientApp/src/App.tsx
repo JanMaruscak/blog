@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState,useMemo} from 'react';
 import Login from './components/Login';
 import './App.css';
 import {UserContext} from "./context/UserContext";
 
 function App() {
-    const [value, setValue] = useState("context");
-    // @ts-ignore
+    const [user, setUser] = useState();
+    
+    const value = { user, setUser };
     return (
     <div className="App">
-        <UserContext>
+        <UserContext.Provider value={value}>
       <Login/>
-        </UserContext>
+        </UserContext.Provider>
     </div>
   );
 }

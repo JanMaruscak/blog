@@ -5,11 +5,11 @@ function Login() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     
-    const user = useContext(UserContext)
+    const {user,setUser} = useContext(UserContext)
     
     return (
         <div>
-            {user}
+            {user.email}
             <label>
                 Email:
                 <input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
