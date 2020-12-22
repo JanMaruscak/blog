@@ -8,8 +8,7 @@ function Login() {
     const {user,setUser} = useContext(UserContext)
     
     return (
-        <div>
-            {user.email}
+        <div>            
             <label>
                 Email:
                 <input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
@@ -18,7 +17,7 @@ function Login() {
                 Password:
                 <input type="text" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" onClick={()=>setUser({name:user?.name, password: user?.password+"lol"})}/>
         </div>
     );
 }
