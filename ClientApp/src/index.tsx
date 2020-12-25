@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import Navbar from "./components/Navbar";
+import Browse from "./pages/Browse";
+import "./styles/index.css"
+import Latest from "./pages/Latest";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <Router>
+          <Navbar/>
+          <Switch>
+              <Route exact path="/" component={Latest}/>
+              <Route exact path="/latest" component={Latest}/>
+              <Route exact path="/browse" component={Browse}/>
+          </Switch>
+      </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
