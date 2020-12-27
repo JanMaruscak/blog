@@ -1,13 +1,13 @@
 ﻿import React from 'react';
 
-type ArticleProps = {
+type ArticleCardProps = {
     title: string,
     tags: Array<string>,
     date: Date,
     imgUrl: string
 }
 
-export const Article = ({title, tags,date,imgUrl} : ArticleProps)=> {
+export const ArticleCard = ({title, tags,date,imgUrl} : ArticleCardProps)=> {
     return (
         <div className="article">
             <img src={imgUrl} alt=""/>

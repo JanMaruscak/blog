@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using blog.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace blog
 {
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        private IdentityUser User;
-
-        public DbContext(DbContextOptions<DbContext> options) : base() 
-        {
-            
-        }
+        public DbSet<Article> Articles { get; set; }
+        public DbContext(DbContextOptions<DbContext> options)
+            : base(options)
+        { }
     }
 }
