@@ -1,26 +1,35 @@
-﻿.articles
+﻿$article-width: 350px
+.articles
   display: flex
   max-width: 100%
   flex-wrap: wrap
   justify-content: center
 .article
   background-color: $article-background
-  width: 300px
-  height: 275px
+  width: $article-width
+  height: calc(#{$article-width} - 25px)
   display: flex
   flex-direction: column
   margin: 20px
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+  position: relative
+  &-link
+    position: absolute
+    height: 100%
+    width: 100%
+    left: 0
+    top: 0
   img
-    height: 160px
+    height: 100%
+    object-fit: cover
   &-lower
-    padding: 18px
+    padding: 22px
     display: flex
     flex-direction: column
     justify-content: space-between
     height: 100%
     h3
-      font-size: 18px
+      font-size: 22px
       font-weight: normal
     &-subInfo
       display: flex

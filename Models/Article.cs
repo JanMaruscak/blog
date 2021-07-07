@@ -10,5 +10,7 @@ namespace blog.Models
         public List<Tag> Tags { get; set; }
         public DateTime Created { get; set; }
         public string ImgUrl { get; set; }
+        public List<Text> Texts { get; set; }
+        public List<Image> Images { get; set; }
     }
 }

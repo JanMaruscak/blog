@@ -22,7 +22,7 @@ namespace blog.Controllers
         }    
         [AllowAnonymous]    
         [HttpPost]    
-        public IActionResult Login([FromBody]UserModel login)    
+        public IActionResult Login([FromBody]User login)    
         {    
             IActionResult response = Unauthorized();    
             var user = AuthenticateUser(login);    
@@ -36,7 +36,7 @@ namespace blog.Controllers
             return response;    
         }    
 
-        private string GenerateJSONWebToken(UserModel userInfo)    
+        private string GenerateJSONWebToken(User userInfo)    
         {    
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));    
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);    
@@ -50,15 +50,15 @@ namespace blog.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);    
         }    
 
-        private UserModel AuthenticateUser(UserModel login)    
+        private User AuthenticateUser(User login)    
         {    
-            UserModel user = null;    
+            User user = null;    
 
             //Validate the User Credentials    
             //Demo Purpose, I have Passed HardCoded User Information    
             if (login.Username == "Jignesh")    
             {    
-                user = new UserModel { Username = "Jignesh Trivedi", EmailAddress = "test.btest@gmail.com" };    
+                user = new User { Username = "Jignesh Trivedi", EmailAddress = "test.btest@gmail.com" };    
             }    
             return user;    
         }    

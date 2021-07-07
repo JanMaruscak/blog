@@ -10,6 +10,11 @@ import Navbar from "./components/Navbar";
 import Browse from "./pages/Browse";
 import "./styles/index.css"
 import Latest from "./pages/Latest";
+/*import Login from "./pages/Login";*/
+import NotFound from "./pages/NotFound";
+import ArticlePage from "./pages/ArticlePage"
+import AddArticle from "./pages/AddArticle";
+import Login from "./components/Login"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +24,10 @@ ReactDOM.render(
               <Route exact path="/" component={Latest}/>
               <Route exact path="/latest" component={Latest}/>
               <Route exact path="/browse" component={Browse}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/article/:id" component={ArticlePage}/>
+              <Route exact path="/addArticle" component={AddArticle}/>
+              <Route component={NotFound} />
           </Switch>
       </Router>
   </React.StrictMode>,

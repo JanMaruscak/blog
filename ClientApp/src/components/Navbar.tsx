@@ -9,6 +9,8 @@ function Navbar() {
             <NavLink exact to ="/" activeClassName="is-active">Home</NavLink>
             <NavLink to ="/latest" activeClassName="is-active">Latest</NavLink>
             <NavLink to ="/browse" activeClassName="is-active">Browse</NavLink>
+            <NavLink to ="/login" activeClassName="is-active">Login</NavLink>
+            <NavLink to="/addArticle" activeClassName="is-active">AddArticle</NavLink>
         </nav>
     );
 }

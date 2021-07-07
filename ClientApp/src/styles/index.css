@@ -24,25 +24,34 @@ nav .is-active {
 
 .article {
   background-color: #0F3460;
-  width: 300px;
-  height: 275px;
+  width: 350px;
+  height: calc(350px - 25px);
   display: flex;
   flex-direction: column;
   margin: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  position: relative;
+}
+.article-link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
 }
 .article img {
-  height: 160px;
+  height: 100%;
+  object-fit: cover;
 }
 .article-lower {
-  padding: 18px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
 .article-lower h3 {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: normal;
 }
 .article-lower-subInfo {
@@ -50,7 +59,7 @@ nav .is-active {
   justify-content: space-between;
 }
 .article-lower-subInfo .tags {
-  color: #3BB747;
+  color: #3dd07d;
   font-weight: bolder;
 }
 .article-lower-subInfo .tags span {
