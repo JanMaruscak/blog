@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import ArticlePage from "./pages/ArticlePage"
 import AddArticle from "./pages/AddArticle";
 import Login from "./components/Login"
+import EditArticle from "./pages/EditArticle";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.render(
               <Route exact path="/browse" component={Browse}/>
               <Route exact path="/login" component={Login}/>
               <Route exact path="/article/:id" component={ArticlePage}/>
+              <Route exact path="/editArticle/:id" component={EditArticle}/>
               <Route exact path="/addArticle" component={AddArticle}/>
               <Route component={NotFound} />
           </Switch>

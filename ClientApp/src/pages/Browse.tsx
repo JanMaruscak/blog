@@ -9,8 +9,7 @@ type ObjectData = {
     title: string,
     imgUrl:string,
     created: Date,
-    tags: string[]
-    
+    tags: string[]    
 }
 
 class Browse extends React.Component<any> {
@@ -21,7 +20,7 @@ class Browse extends React.Component<any> {
         fetch("api/blogs", {
             method: "GET"
         }).then(res => res.json()).then(data => this.setState({Data: data},()=>{
-            console.log(this.state.Data)
+            //console.log(this.state.Data)
         }))
         
     }
@@ -32,8 +31,8 @@ class Browse extends React.Component<any> {
             <div className="main-wrapper">
                 <div className="articles">
                     {this.state.Data.map(function(obj,id){
-                        console.log("prdel")
-                        console.log(obj)
+                        //console.log("prdel")
+                        //console.log(obj)
                         return(
                         <ArticleCard key={obj.id} id={obj.id} title={obj.title} date={new Date()}
                                      tags={obj.tags}

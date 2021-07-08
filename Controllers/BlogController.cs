@@ -38,18 +38,35 @@ namespace blog.Controllers
             return article;
         }
 
+        // GET: api/Blogs
         [HttpPost]
-        public async Task<ActionResult<Article>> PostArticle([FromBody] string title)
+        public async Task<ActionResult<Article>> PostArticle([FromBody] Article article)
         {
-            if (title == null)
+            if (article == null)
             {
                 return null;
             }
-            var article = new Article() {Title = title};
             _context.Articles.Add(article);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetArticle", new { id = article.Id }, article);
+        }
+
+        // GET: api/Blogs/edit
+        [HttpPost]
+        [Route("/edit")]
+        public async void EditArticle([FromBody] Article article)
+        {
+            if (article == null)
+            {
+                return;
+            }
+
+            Article temp = _context.Articles.FindAsync(article.Id).Result;
+            _context.Entry(temp).CurrentValues.SetValues(article);
+            await _context.SaveChangesAsync();
+
+            // CreatedAtAction("GetArticle", new {id = article.Id}, article);
         }
     }
 }
