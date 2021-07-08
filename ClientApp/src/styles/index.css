@@ -67,7 +67,34 @@ nav .is-active {
   font-size: 14px;
 }
 .article-lower-subInfo .date {
-  color: #E1E1E1;
+  color: #B6B3B3;
+}
+
+.articleView {
+  width: 600px;
+}
+.articleView .main-img {
+  width: 100%;
+}
+.articleView h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+.articleView .tags {
+  color: #3dd07d;
+  font-weight: bolder;
+}
+.articleView span {
+  margin-right: 8px;
+  font-size: 14px;
+}
+.articleView .articleInfo {
+  color: #B6B3B3;
+  color-font-size: 14px;
+}
+.articleView .content {
+  margin-top: 30px;
+  font-size: 18px;
 }
 
 * {

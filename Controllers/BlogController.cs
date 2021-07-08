@@ -55,18 +55,18 @@ namespace blog.Controllers
         // GET: api/Blogs/edit
         [HttpPost]
         [Route("/edit")]
-        public async void EditArticle([FromBody] Article article)
+        public async Task<ActionResult<Article>> EditArticle([FromBody] Article article)
         {
             if (article == null)
             {
-                return;
+                return null;
             }
 
-            Article temp = _context.Articles.FindAsync(article.Id).Result;
+            Article temp = _context.Articles.Find(article.Id);
             _context.Entry(temp).CurrentValues.SetValues(article);
             await _context.SaveChangesAsync();
 
-            // CreatedAtAction("GetArticle", new {id = article.Id}, article);
+            return CreatedAtAction("GetArticle", new {id = article.Id}, article);
         }
     }
 }
