@@ -1,10 +1,14 @@
 ﻿import React from 'react';
 import {Link } from 'react-router-dom'
 
+type Tag = {
+    id: number,
+    value: string
+}
 type ArticleCardProps = {
     id: number,
     title: string,
-    tags: Array<string>,
+    tags: Tag[],
     date: Date,
     imgUrl: string
 }
@@ -20,7 +24,7 @@ export const ArticleCard = ({id, title, tags,date,imgUrl} : ArticleCardProps)=> 
                     <h3>{title}</h3>
                     <div className="article-lower-subInfo">
                         <div className="tags">
-                            {tags && tags.map((el,i)=> <span key={i}>{el}</span> )}
+                            {tags && tags.map((el,i)=> <span key={i}>{el.value}</span> )}
                         </div>
                         { date&& <time className="date"
                                       dateTime={date.toDateString()}>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</time>

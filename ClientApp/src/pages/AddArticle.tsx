@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import InputTag from "../components/InputTag";
 
 
 type MyState = {
@@ -24,16 +25,20 @@ class AddArticle extends React.Component<MyState>{
     }
     submitNew = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        const data = new FormData();
-        data.append("title",this.state.Title)
+        let tagsObj = [
+        ]
+        for (var i = 0; i < this.state.Tags.length; i++) {
+            tagsObj.push({"Value":this.state.Tags[i]})
+        }
         let info = {
             Title: this.state.Title,
             ImgUrl: this.state.ImgUrl,
-            Tags: [],
+            Tags: tagsObj,
             Created: new Date(),
             Author: this.state.Author,
             Text: this.state.Text
         }
+        console.log(info)
         fetch(`/api/blogs`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -47,7 +52,7 @@ class AddArticle extends React.Component<MyState>{
     };
     render() {
         return (
-        <form onSubmit={this.submitNew}>
+        <form className="main-wrapper" onSubmit={this.submitNew}>
             <div>
                 <label htmlFor="Title">Name:</label>
                 <input type="text" name="Title" onChange={this.onChange} value={this.state.Title}/>
@@ -56,6 +61,7 @@ class AddArticle extends React.Component<MyState>{
                 <label htmlFor="ImgUrl">ImgUrl:</label>
                 <input type="text" name="ImgUrl" onChange={this.onChange} value={this.state.ImgUrl}/>
             </div>
+            <InputTag toggleState={(e, tags) => this.setState({Tags:tags})} />
             <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>
             <button>Send</button>
         </form>)

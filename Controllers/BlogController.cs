@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using blog.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,14 +22,14 @@ namespace blog.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
         {
-            return await _context.Articles.ToListAsync();
+            return await _context.Articles.Include(x => x.Tags).ToListAsync();
         }
 
         // GET: api/Blogs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Article>> GetArticle(int id)
         {
-            var article = await _context.Articles.FindAsync(id);
+            var article = await _context.Articles.Include(x => x.Tags).FirstAsync(x => x.Id == id);
 
             if (article == null)
             {
@@ -67,6 +68,14 @@ namespace blog.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetArticle", new {id = article.Id}, article);
+        }
+
+        [HttpPost("{id}")]
+        public async Task RemoveArticle(int id)
+        {
+            var article = GetArticle(id).Result.Value;
+            _context.Articles.Remove(article);
+            await _context.SaveChangesAsync();
         }
     }
 }

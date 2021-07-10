@@ -4,12 +4,16 @@ import {ArticleCard} from "../components/ArticleCard";
 type ArticleData ={
     Data: ObjectData[]
 }
+type Tag ={
+    id: number,
+    value: string
+}
 type ObjectData = {
     id: number,
     title: string,
     imgUrl:string,
-    created: Date,
-    tags: string[]    
+    created: string,
+    tags: Tag[]    
 }
 
 class Browse extends React.Component<any> {
@@ -21,6 +25,7 @@ class Browse extends React.Component<any> {
             method: "GET"
         }).then(res => res.json()).then(data => this.setState({Data: data},()=>{
             //console.log(this.state.Data)
+            
         }))
         
     }
@@ -30,11 +35,9 @@ class Browse extends React.Component<any> {
             
             <div className="main-wrapper">
                 <div className="articles">
-                    {this.state.Data.map(function(obj,id){
-                        //console.log("prdel")
-                        //console.log(obj)
+                    {this.state.Data.map(function(obj){
                         return(
-                        <ArticleCard key={obj.id} id={obj.id} title={obj.title} date={new Date()}
+                        <ArticleCard key={obj.id} id={obj.id} title={obj.title} date={new Date(Date.parse(obj.created))}
                                      tags={obj.tags}
                                      imgUrl={obj.imgUrl}/>)}        
                     )}

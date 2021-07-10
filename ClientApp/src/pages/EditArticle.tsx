@@ -61,8 +61,6 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
 
     editNew = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        const data = new FormData();
-        data.append("title", this.state.Title ? this.state.Title : '')
         let info = {
             Id: this.state.Id,
             Title: this.state.Title,
@@ -86,7 +84,7 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
 
     render() {
         return (
-            <form onSubmit={this.editNew}>
+            <form className="main-wrapper" onSubmit={this.editNew}>
                 <div>
                     <label htmlFor="Title">Name:</label>
                     <input type="text" name="Title" onChange={this.onChange} value={this.state.Title}/>
