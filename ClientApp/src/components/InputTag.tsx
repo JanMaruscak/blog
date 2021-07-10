@@ -7,48 +7,57 @@ type MyState = {
 };
 type ChildProps = {
     toggleState: (e: React.MouseEvent, tags: string[]) => void;
+    Items: string[]
 // −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−^^^^^^^^^^^^^^^
 }
 
 
 class InputTag extends React.Component<ChildProps,MyState> {
     state: MyState = {
-        Tags: [],
+        Tags: this.props.Items,
         Input: ""
     }
-    submitNew = (e: { preventDefault: () => void; }) => {
-/*1        e.preventDefault();
-        let info = {
-            Tags: [],
+
+    componentDidUpdate(prevProps: ChildProps) {
+        if (this.props.Items !== prevProps.Items) {
+            this.setState({Tags: this.props.Items})
         }
-        fetch(`/api/blogs`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(info)
-        })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));*/
     }
+    componentDidMount() {
+        this.setState({Tags: this.props.Items})
+    }
+
     onChange = (e: React.FormEvent<HTMLInputElement>): void => {
         this.setState({[e.currentTarget.name]: e.currentTarget.value});
     };
+    addTag = (event: React.MouseEvent<HTMLElement>): void =>{
+        let joined = this.state.Tags?.concat(this.state.Input ? this.state.Input : "");
+        this.setState({Tags: joined, Input: ""})
+        this.props.toggleState(event, joined ? joined : [])
+    }
+    removeTag (event: React.MouseEvent<HTMLElement>, tag: string) {
+        const newList = this.state.Tags?.filter((item) => item !== tag);
+        this.setState({Tags: newList})
+        this.props.toggleState(event, newList ? newList : [])
+    }
 
     render() {
         return (
             <div>
+{/*                {console.log(this.props.Items)}
+                {console.log(this.state.Tags)}*/}
                 <ul>
-                    {this.state.Tags?.map(function (tag, key) {
+                    {this.state.Tags?.map((tag, key) => {
                             return (
-                                <li key={key}>{tag}</li>)
+                                <>
+                                    <li key={key}>{tag}</li>
+                                    <button type="button" onClick={(e) => this.removeTag(e,tag)}>Remove</button>
+                                </>)
                         }
                     )}
                 </ul>
                 <input type="text" name="Input" value={this.state.Input} onChange={this.onChange}/>
-                <button type="button" onClick={(event: React.MouseEvent<HTMLElement>) => {
-                    let joined = this.state.Tags?.concat(this.state.Input? this.state.Input : "");
-                    this.setState({Tags: joined, Input: ""})
-                    this.props.toggleState(event, joined ? joined : [])
-                }}>Add</button>
+                <button type="button" onClick={this.addTag}>Add</button>
             </div>
         )
     }

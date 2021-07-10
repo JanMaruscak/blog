@@ -43,7 +43,6 @@ class Article extends React.Component<DetailsProps, MyState> {
         fetch("/api/blogs/" + this.props.match?.params.id, {
             method: "GET"
         }).then(res => res.json()).then(data => this.setState({Data: data}, () => {
-            console.log(this.state.Data)
             this.setState({
                 Title: data.title,
                 Created: new Date(Date.parse(data.created)),

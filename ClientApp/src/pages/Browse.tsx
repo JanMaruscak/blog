@@ -23,13 +23,8 @@ class Browse extends React.Component<any> {
     componentDidMount() {
         fetch("api/blogs", {
             method: "GET"
-        }).then(res => res.json()).then(data => this.setState({Data: data},()=>{
-            //console.log(this.state.Data)
-            
-        }))
-        
+        }).then(res => res.json()).then(data => this.setState({Data: data}))        
     }
-
     render() {
         return (
             

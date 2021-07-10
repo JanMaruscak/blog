@@ -27,7 +27,7 @@ class AddArticle extends React.Component<MyState>{
         e.preventDefault();
         let tagsObj = [
         ]
-        for (var i = 0; i < this.state.Tags.length; i++) {
+        for (let i = 0; i < this.state.Tags.length; i++) {
             tagsObj.push({"Value":this.state.Tags[i]})
         }
         let info = {
@@ -61,7 +61,7 @@ class AddArticle extends React.Component<MyState>{
                 <label htmlFor="ImgUrl">ImgUrl:</label>
                 <input type="text" name="ImgUrl" onChange={this.onChange} value={this.state.ImgUrl}/>
             </div>
-            <InputTag toggleState={(e, tags) => this.setState({Tags:tags})} />
+            <InputTag Items={[]} toggleState={(e, tags) => this.setState({Tags:tags})} />
             <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>
             <button>Send</button>
         </form>)

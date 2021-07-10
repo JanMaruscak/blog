@@ -18,14 +18,14 @@ namespace blog.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
-            return await _context.Tags.ToListAsync();
+            return await _context.Tags.Include(x=>x.Articles).ToListAsync();
         }
 
         // GET: api/tags/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Tag>> GetTag(int id)
         {
-            var tag = await _context.Tags.FindAsync(id);
+            var tag = await _context.Tags.Include(x => x.Articles).FirstAsync(x => x.Id == id);
 
             if (tag == null)
             {

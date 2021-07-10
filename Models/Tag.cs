@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace blog.Models
 {
@@ -6,6 +8,7 @@ namespace blog.Models
     {
         public int Id { get; set; }
         public string Value { get; set; }
-        private List<int> ArticleIds { get; set; }
+        [JsonIgnore]
+        public List<Article> Articles { get; set; }
     }
 }

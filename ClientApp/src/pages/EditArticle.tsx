@@ -2,7 +2,12 @@
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {match} from 'react-router-dom';
+import InputTag from "../components/InputTag";
 
+type Tag = {
+    id: number,
+    value: string
+}
 type MyState = {
     Id?: number,
     Title?: string,
@@ -43,29 +48,43 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
         Author: ""
 
     }
-    componentDidMount() {
+
+    componentDidMount() {        
         fetch("/api/blogs/"+ this.props.match?.params.id, {
             method: "GET"
         }).then(res => res.json()).then(data => this.setState({Data: data}, () => {
-            console.log(this.state.Data)
+            //console.log(this.state.Data)
+            let newTags = []
+            console.log(data)
+            for (let i = 0; i < data.tags.length; i++) {
+                console.log(data.tags[i].value)
+                newTags.push(data.tags[i].value)
+            }
+            console.log(newTags)
             this.setState({
                 Id: data.id,
                 Title: data.title,
                 Created: new Date(Date.parse(data.created)),
                 ImgUrl: data.imgUrl,
                 Text: data.text,
-                Author: data.author
+                Author: data.author,
+                Tags: newTags
             })
         }))
     }
 
     editNew = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
+        let tagsObj = []
+        if (this.state.Tags)
+            for (let i = 0; i < this.state.Tags.length; i++) {
+                tagsObj.push({"Value": this.state.Tags[i]})
+            }
         let info = {
             Id: this.state.Id,
             Title: this.state.Title,
             ImgUrl: this.state.ImgUrl,
-            Tags: [],
+            Tags: tagsObj,
             Created: new Date(),
             Author: this.state.Author,
             Text: this.state.Text
@@ -97,6 +116,7 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
                     <label htmlFor="Author">Author:</label>
                     <input type="text" name="Author" onChange={this.onChange} value={this.state.Author}/>
                 </div>
+                <InputTag Items={this.state.Tags ? this.state.Tags : []} toggleState={(e, tags) => this.setState({Tags: tags})}/>
                 <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>
                 <button>Send</button>
             </form>)
