@@ -43,20 +43,18 @@ class InputTag extends React.Component<ChildProps,MyState> {
 
     render() {
         return (
-            <div>
-{/*                {console.log(this.props.Items)}
-                {console.log(this.state.Tags)}*/}
+            <div className="input-wrapper">
                 <ul>
                     {this.state.Tags?.map((tag, key) => {
-                            return (
-                                <>
-                                    <li key={key}>{tag}</li>
-                                    <button type="button" onClick={(e) => this.removeTag(e,tag)}>Remove</button>
-                                </>)
+                        return (
+                            <>
+                                <li key={key}>{tag}</li>
+                                <button type="button" onClick={(e) => this.removeTag(e,tag)}>Remove</button>
+                            </>)
                         }
                     )}
                 </ul>
-                <input type="text" name="Input" value={this.state.Input} onChange={this.onChange}/>
+                <input placeholder="Tag Name" type="text" name="Input" value={this.state.Input} onChange={this.onChange}/>
                 <button type="button" onClick={this.addTag}>Add</button>
             </div>
         )

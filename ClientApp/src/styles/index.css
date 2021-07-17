@@ -97,6 +97,57 @@ nav .is-active {
   font-size: 18px;
 }
 
+form {
+  width: 400px;
+}
+form .input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+form .input-wrapper label {
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-left: 1px;
+}
+form .input-wrapper input {
+  font-size: 18px;
+  padding: 10px 15px;
+  border: 1px gray solid;
+  border-radius: 5px;
+  background-color: inherit;
+  color: white;
+}
+form .input-wrapper input:focus {
+  outline: 1px white solid;
+}
+form button {
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 5px;
+}
+form button[type=submit] {
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 25px;
+  font-size: 18px;
+  color: white;
+  background-image: linear-gradient(to right, #AA076B 0%, #61045F 51%, #AA076B 100%);
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  display: block;
+}
+form button[type=submit]:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
 * {
   margin: 0;
   padding: 0;

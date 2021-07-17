@@ -52,19 +52,25 @@ class AddArticle extends React.Component<MyState>{
     };
     render() {
         return (
-        <form className="main-wrapper" onSubmit={this.submitNew}>
-            <div>
-                <label htmlFor="Title">Name:</label>
-                <input type="text" name="Title" onChange={this.onChange} value={this.state.Title}/>
-            </div>
-            <div>
-                <label htmlFor="ImgUrl">ImgUrl:</label>
-                <input type="text" name="ImgUrl" onChange={this.onChange} value={this.state.ImgUrl}/>
-            </div>
-            <InputTag Items={[]} toggleState={(e, tags) => this.setState({Tags:tags})} />
-            <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>
-            <button>Send</button>
-        </form>)
+        <div className="main-wrapper">
+            <h1>Add article</h1>
+            <form className="main-wrapper" onSubmit={this.submitNew}>
+                <div className="input-wrapper">
+                    <input placeholder="Title" type="text" name="Title" onChange={this.onChange} value={this.state.Title}/>
+                </div>
+                <div className="input-wrapper">
+                    <input placeholder="Image Url" type="text" name="ImgUrl" onChange={this.onChange} value={this.state.ImgUrl}/>
+                </div>
+                <div className="input-wrapper">
+                    <label>Tags:</label>
+                    <InputTag Items={this.state.Tags} toggleState={(e, tags) => this.setState({Tags:tags})} />
+                </div>
+                <div className="input-wrapper">
+                    <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>
+                </div>
+                <button type="submit">Post article</button>
+            </form>
+        </div>)
     }
 }
 export default AddArticle

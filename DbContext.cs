@@ -8,6 +8,7 @@ namespace blog
     {
         public DbSet<Article> Articles { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public DbContext(DbContextOptions<DbContext> options)
             : base(options)

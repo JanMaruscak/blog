@@ -103,23 +103,27 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
 
     render() {
         return (
-            <form className="main-wrapper" onSubmit={this.editNew}>
-                <div>
-                    <label htmlFor="Title">Name:</label>
-                    <input type="text" name="Title" onChange={this.onChange} value={this.state.Title}/>
-                </div>
-                <div>
-                    <label htmlFor="ImgUrl">ImgUrl:</label>
-                    <input type="text" name="ImgUrl" onChange={this.onChange} value={this.state.ImgUrl}/>
-                </div>
-                <div>
-                    <label htmlFor="Author">Author:</label>
-                    <input type="text" name="Author" onChange={this.onChange} value={this.state.Author}/>
-                </div>
-                <InputTag Items={this.state.Tags ? this.state.Tags : []} toggleState={(e, tags) => this.setState({Tags: tags})}/>
-                <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>
-                <button>Send</button>
-            </form>)
+            <div className="main-wrapper">
+                <h1>Edit article {this.state.Id}</h1>
+                <form className="main-wrapper" onSubmit={this.editNew}>
+                    <div className="input-wrapper">
+                        <input placeholder="Title" type="text" name="Title" onChange={this.onChange} value={this.state.Title}/>
+                    </div>
+                    <div className="input-wrapper">
+                        <input placeholder="Image Url" type="text" name="ImgUrl" onChange={this.onChange} value={this.state.ImgUrl}/>
+                    </div>
+                    <div className="input-wrapper">
+                        <input placeholder="Author" type="text" name="Author" onChange={this.onChange} value={this.state.Author}/>
+                    </div>
+                    <div className="input-wrapper">
+                        <InputTag Items={this.state.Tags ? this.state.Tags : []} toggleState={(e, tags) => this.setState({Tags: tags})}/>
+                    </div>
+                    <div className="input-wrapper">
+                        <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>
+                    </div>
+                    <button type="submit">Edit article</button>
+                </form>
+            </div>)
     }
 }
 

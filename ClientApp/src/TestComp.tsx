@@ -1,5 +1,4 @@
-import React, {useState,useMemo} from 'react';
-import Login from './components/Login';
+import React from 'react';
 import {UserContext} from "./context/UserContext";
 
 function App() {

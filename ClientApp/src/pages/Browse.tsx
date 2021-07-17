@@ -29,6 +29,7 @@ class Browse extends React.Component<any> {
         return (
             
             <div className="main-wrapper">
+                <h1>Browse</h1>
                 <div className="articles">
                     {this.state.Data.map(function(obj){
                         return(

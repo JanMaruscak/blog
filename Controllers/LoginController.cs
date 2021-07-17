@@ -3,25 +3,40 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;    
 using Microsoft.IdentityModel.Tokens;    
 using System;    
-using System.IdentityModel.Tokens.Jwt;    
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;    
 using System.Text;
 using blog.Models;
 
 namespace blog.Controllers
 {
-    [Route("api/[controller]")]    
+    [Route("api/login")]    
     [ApiController]    
     public class LoginController : Controller    
     {    
-        private IConfiguration _config;    
+        private IConfiguration _config;
+        private DbContext _context;
 
-        public LoginController(IConfiguration config)    
+        public LoginController(IConfiguration config, DbContext context)    
         {    
-            _config = config;    
-        }    
-        [AllowAnonymous]    
-        [HttpPost]    
+            _config = config;
+            _context = context;
+        }
+
+        [Route("register")]
+        [HttpPost]
+        public IActionResult Register([FromBody] User register)
+        {
+            if (AddUser(register))
+            {
+                return Ok();
+            }
+
+            return BadRequest("User with same email address already exists.");
+        }
+        [AllowAnonymous]
+        [HttpPost]
         public IActionResult Login([FromBody]User login)    
         {    
             IActionResult response = Unauthorized();    
@@ -56,11 +71,22 @@ namespace blog.Controllers
 
             //Validate the User Credentials    
             //Demo Purpose, I have Passed HardCoded User Information    
-            if (login.Username == "Jignesh")    
-            {    
-                user = new User { Username = "Jignesh Trivedi", EmailAddress = "test.btest@gmail.com" };    
-            }    
+            if(_context.Users.Any(x=>x.EmailAddress==login.EmailAddress&&x.Username==login.Username&&x.Password==login.Password))
+            {
+                user = login;
+            }
             return user;    
-        }    
+        }
+
+        private bool AddUser(User register)
+        {
+            if (_context.Users.Any(x => x.EmailAddress == register.EmailAddress)) return false;
+            
+            _context.Users.Add(register);
+            _context.SaveChanges();
+
+            return true;
+
+        }
     }    
 }
