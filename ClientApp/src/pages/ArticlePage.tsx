@@ -5,13 +5,17 @@ interface DetailParams {
     id: string;
 }
 
+type Tag = {
+    id: number,
+    value: string
+}
 interface DetailsProps {
     required: string;
     match?: match<DetailParams>;
 }
 type MyState = {
     Title?: string,
-    Tags?: string[],
+    Tags?: Tag[],
     Created?: Date,
     ImgUrl?: string,
     Text?: any,
@@ -23,7 +27,7 @@ type ObjectData = {
     title: string,
     imgUrl: string,
     created: Date,
-    tags: string[],
+    tags: Tag[],
     author: string
 
 }
@@ -48,7 +52,8 @@ class Article extends React.Component<DetailsProps, MyState> {
                 Created: new Date(Date.parse(data.created)),
                 ImgUrl: data.imgUrl,
                 Text: data.text,
-                Author: data.author
+                Author: data.author,
+                Tags: data.tags
             })
         }))
     }
@@ -62,6 +67,11 @@ class Article extends React.Component<DetailsProps, MyState> {
                         </Link>
                     </div>
                     <img className="main-img" src={this.state.ImgUrl} alt=""/>
+                    <div className="tags">
+                        {this.state.Tags?.map((e,key) =>{
+                            return (<div key={key}>{e.value}</div>)
+                        })}
+                    </div>
                     <h1>{this.state.Title}</h1>
                     <div className="articleInfo">
                     {

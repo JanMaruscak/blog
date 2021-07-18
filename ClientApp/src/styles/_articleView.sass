@@ -1,19 +1,48 @@
 ﻿.articleView
   width: 600px
   .main-img
-    width: 100%
+    max-width: 150%
+    max-height: 500px
+    width: auto
+    height: auto
+    border-radius: 5px
+    margin-left: 50%
+    transform: translateX(-50%)
+    display: block
+    margin-bottom: 30px
   h1
     font-size: 30px
     font-weight: bold
   .tags
     color: $tag-color
     font-weight: bolder
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-bottom: 15px
+    font-size: 18px
+    div
+      &:after
+        content: "\A"
+        width: 6px
+        height: 6px
+        border-radius: 50%
+        background: white
+        display: inline-block
+        margin: 0 6px
+        vertical-align: middle
+      &:last-of-type
+        &:after
+          content: ""
+          width: 0
+          height: 0
+          margin: 0
   span
     margin-right: 8px
     font-size: 14px
   .articleInfo
     color: $text-gray
-      font-size: 14px
+    font-size: 14px
       
   .content
     margin-top: 30px

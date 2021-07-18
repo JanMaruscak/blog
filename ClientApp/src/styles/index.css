@@ -31,6 +31,7 @@ nav .is-active {
   margin: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   position: relative;
+  border-radius: 5px;
 }
 .article-link {
   position: absolute;
@@ -42,6 +43,8 @@ nav .is-active {
 .article img {
   height: 140%;
   object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .article-lower {
   padding: 22px;
@@ -74,7 +77,15 @@ nav .is-active {
   width: 600px;
 }
 .articleView .main-img {
-  width: 100%;
+  max-width: 150%;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  margin-bottom: 30px;
 }
 .articleView h1 {
   font-size: 30px;
@@ -83,6 +94,27 @@ nav .is-active {
 .articleView .tags {
   color: #3dd07d;
   font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.articleView .tags div:after {
+  content: "\a";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  display: inline-block;
+  margin: 0 6px;
+  vertical-align: middle;
+}
+.articleView .tags div:last-of-type:after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin: 0;
 }
 .articleView span {
   margin-right: 8px;
@@ -90,7 +122,7 @@ nav .is-active {
 }
 .articleView .articleInfo {
   color: #B6B3B3;
-  color-font-size: 14px;
+  font-size: 14px;
 }
 .articleView .content {
   margin-top: 30px;

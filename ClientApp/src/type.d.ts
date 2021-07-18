@@ -1,6 +1,7 @@
 ﻿interface IUser{
-    name: string | undefined,
-    password: string | undefined
+    UserName: string | undefined,
+    Password: string | undefined,
+    EmailAddress: string | undefined
 }
 abstract class Content{
 }

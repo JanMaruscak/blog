@@ -5,5 +5,5 @@ export type UserContextType = {
     setUser: (User: IUser) => void;
 }
 
-export const UserContext = createContext<UserContextType>({ user: {name:"name",password:"pass"}, setUser: name => console.warn('no theme provider')});
+export const UserContext = createContext<UserContextType>({ user: {UserName:"name",Password:"pass", EmailAddress:""}, setUser: name => console.warn('no theme provider')});
 export const useUser = () => useContext(UserContext);
