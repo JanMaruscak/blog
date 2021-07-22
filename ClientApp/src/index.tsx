@@ -1,38 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import Navbar from "./components/Navbar";
-import Browse from "./pages/Browse";
 import "./styles/index.css"
-import Latest from "./pages/Latest";
-import NotFound from "./pages/NotFound";
-import ArticlePage from "./pages/ArticlePage"
-import AddArticle from "./pages/AddArticle";
-import Login from "./pages/Login"
-import EditArticle from "./pages/EditArticle";
-import Home from "./pages/Home";
+import App from "./components/App";
+import UserProvider, {UserContext} from "./context/UserContext";
+
+export {UserContext, default} from "./context/UserContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-      <Router>
-          <Navbar/>
-          <Switch>
-              <Route exact path="/" component={Home}/>
-              <Route exact path="/latest" component={Latest}/>
-              <Route exact path="/browse" component={Browse}/>
-              <Route exact path="/login" component={Login}/>
-              <Route exact path="/article/:id" component={ArticlePage}/>
-              <Route exact path="/editArticle/:id" component={EditArticle}/>
-              <Route exact path="/addArticle" component={AddArticle}/>
-              <Route component={NotFound} />
-          </Switch>
-      </Router>
-  </React.StrictMode>,
+    <UserProvider>
+        <App />
+    </UserProvider>,
   document.getElementById('root')
 );
 

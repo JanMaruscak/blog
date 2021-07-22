@@ -1,4 +1,5 @@
-﻿import React from 'react';
+﻿import React, {useContext} from 'react';
+import {UserContext} from "../context/UserContext";
 
 type MyState = {
     UserName: string,
@@ -7,6 +8,8 @@ type MyState = {
 };
 
 class Login extends React.Component<MyState> {
+
+    static contextType = UserContext
     state: MyState = {
         UserName: "pepa",
         Email: "pepa@gmail.com",
@@ -21,15 +24,26 @@ class Login extends React.Component<MyState> {
             Password: this.state.Password,
             Created: new Date()
         };
-        console.log(user)
         
         fetch(`/api/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(user)
         })
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res)
+                let contextUser = {
+                    Password: this.state.Password,
+                    EmailAddress: this.state.Email,
+                    UserName: this.state.UserName
+                }
+                if(res.status==200)
+                    this.context.login(contextUser)       
+                else
+                    this.context.login({})
+            })
             .catch(err => console.log(err));
+        
     }
     onChange = (e: React.FormEvent<HTMLInputElement>): void => {
         this.setState({[e.currentTarget.name]: e.currentTarget.value});
@@ -48,7 +62,7 @@ class Login extends React.Component<MyState> {
                 <div className="input-wrapper">
                     <input placeholder="Password" type="password" name="Password" onChange={this.onChange} value={this.state.Password}/>
                 </div>
-                <button type="submit">Log in</button>
+                <button type="submit" >Log in</button>
             </form>
         </div>
     );

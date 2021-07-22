@@ -15,6 +15,57 @@ nav .is-active {
   color: pink;
 }
 
+.home-article {
+  display: flex;
+}
+.home-article-left {
+  width: 50%;
+  padding: 15px;
+}
+.home-article-left img {
+  width: 100%;
+}
+.home-article-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+}
+.home-article-right .tags {
+  color: #3dd07d;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.home-article-right .tags div:after {
+  content: "\a";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  display: inline-block;
+  margin: 0 6px;
+  vertical-align: middle;
+}
+.home-article-right .tags div:last-of-type:after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+.home-article-right span {
+  margin-right: 8px;
+  font-size: 14px;
+}
+.home-article-right .articleInfo {
+  color: #B6B3B3;
+  font-size: 14px;
+}
+
 .articles {
   display: flex;
   max-width: 100%;

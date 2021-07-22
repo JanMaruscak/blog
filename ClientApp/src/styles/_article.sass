@@ -1,4 +1,47 @@
 ﻿$article-width: 350px
+.home-article
+  display: flex
+  &-left
+    width: 50%
+    padding: 15px
+    img
+      width: 100%
+  &-right
+    width: 50%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    padding: 15px
+    .tags
+      color: $tag-color
+      font-weight: bolder
+      display: flex
+      justify-content: center
+      align-items: center
+      margin-bottom: 15px
+      font-size: 18px
+      div
+        &:after
+          content: "\A"
+          width: 6px
+          height: 6px
+          border-radius: 50%
+          background: white
+          display: inline-block
+          margin: 0 6px
+          vertical-align: middle
+        &:last-of-type
+          &:after
+            content: ""
+            width: 0
+            height: 0
+            margin: 0
+    span
+      margin-right: 8px
+      font-size: 14px
+    .articleInfo
+      color: $text-gray
+      font-size: 14px
 .articles
   display: flex
   max-width: 100%
