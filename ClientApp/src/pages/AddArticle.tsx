@@ -10,7 +10,8 @@ type MyState = {
     Created: Date,
     ImgUrl: string,
     Text: any,
-    Author: string
+    Author: string,
+    Perex: string
 };
 
 class AddArticle extends React.Component<MyState>{ 
@@ -20,7 +21,8 @@ class AddArticle extends React.Component<MyState>{
         Created: new Date(),
         ImgUrl: "",
         Text: "",
-        Author: ""
+        Author: "",
+        Perex: ""
         
     }
     submitNew = (e: { preventDefault: () => void; }) => {
@@ -36,7 +38,8 @@ class AddArticle extends React.Component<MyState>{
             Tags: tagsObj,
             Created: new Date(),
             Author: this.state.Author,
-            Text: this.state.Text
+            Text: this.state.Text,
+            Perex: this.state.Perex
         }
         console.log(info)
         fetch(`/api/blogs`, {
@@ -60,6 +63,14 @@ class AddArticle extends React.Component<MyState>{
                 </div>
                 <div className="input-wrapper">
                     <input placeholder="Image Url" type="text" name="ImgUrl" onChange={this.onChange} value={this.state.ImgUrl}/>
+                </div>
+                <div className="input-wrapper">
+                    <input placeholder="Author" type="text" name="Author" onChange={this.onChange}
+                           value={this.state.Author}/>
+                </div>
+                <div className="input-wrapper">
+                    <input placeholder="Perex" type="text" name="Perex" onChange={this.onChange}
+                           value={this.state.Perex}/>
                 </div>
                 <div className="input-wrapper">
                     <label>Tags:</label>

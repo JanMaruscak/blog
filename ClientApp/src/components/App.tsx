@@ -19,7 +19,7 @@ function App(){
         <React.StrictMode>
             <Router>
                 <Navbar/>
-                <main style={{minHeight: "75vh", marginBottom: "50px"}}>
+                <main style={{minHeight: "70vh", marginBottom: "40px"}}>
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route exact path="/latest" component={Latest}/>
@@ -40,7 +40,7 @@ function App(){
         <React.StrictMode>
             <Router>
                 <Navbar/>
-                <main style={{minHeight: "75vh"}}>
+                <main style={{minHeight: "70vh", marginBottom: "40px"}}>
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route exact path="/latest" component={Latest}/>

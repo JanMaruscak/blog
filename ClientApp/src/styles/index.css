@@ -17,29 +17,45 @@ nav .is-active {
 
 .home-article {
   display: flex;
+  margin-bottom: 20px;
+  position: relative;
+}
+.home-article .article-link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
 }
 .home-article-left {
   width: 50%;
-  padding: 15px;
+  padding: 0 15px;
 }
 .home-article-left img {
   width: 100%;
+  border-radius: 5px;
 }
 .home-article-right {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 15px;
+  padding: 0 15px;
+}
+.home-article-right h1 {
+  text-align: left;
+}
+.home-article-right .perex {
+  color: #BEBBBB;
+  height: 40%;
+  font-size: 18px;
 }
 .home-article-right .tags {
   color: #3dd07d;
   font-weight: bolder;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15px;
-  font-size: 18px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 .home-article-right .tags div:after {
   content: "\a";
@@ -204,12 +220,13 @@ form .input-wrapper input {
 form .input-wrapper input:focus {
   outline: 1px white solid;
 }
-form button {
+
+button {
   cursor: pointer;
   padding: 5px;
   margin-top: 5px;
 }
-form button[type=submit] {
+button[type=submit] {
   width: 100%;
   border: 0;
   border-radius: 5px;
@@ -224,7 +241,7 @@ form button[type=submit] {
   background-size: 200% auto;
   display: block;
 }
-form button[type=submit]:hover {
+button[type=submit]:hover {
   background-position: right center;
   /* change the direction of the change here */
   color: #fff;

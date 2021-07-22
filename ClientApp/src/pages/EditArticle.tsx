@@ -3,11 +3,8 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {match} from 'react-router-dom';
 import InputTag from "../components/InputTag";
+import Article from "./ArticlePage";
 
-type Tag = {
-    id: number,
-    value: string
-}
 type MyState = {
     Id?: number,
     Title?: string,
@@ -15,18 +12,10 @@ type MyState = {
     Created?: Date,
     ImgUrl?: string,
     Text?: any,
-    Data?: ObjectData[],
-    Author?: string
+    Data?: Article[],
+    Author?: string,
+    Perex?: string 
 };
-type ObjectData = {
-    id: number,
-    title: string,
-    imgUrl: string,
-    created: Date,
-    tags: string[],
-    author: string
-
-}
 
 interface DetailParams {
     id: string;
@@ -45,7 +34,8 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
         ImgUrl: "",
         Text: "",
         Data: [],
-        Author: ""
+        Author: "",
+        Perex: ""
 
     }
 
@@ -68,7 +58,8 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
                 ImgUrl: data.imgUrl,
                 Text: data.text,
                 Author: data.author,
-                Tags: newTags
+                Tags: newTags,
+                Perex: data.perex
             })
         }))
     }
@@ -87,7 +78,8 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
             Tags: tagsObj,
             Created: new Date(),
             Author: this.state.Author,
-            Text: this.state.Text
+            Text: this.state.Text,
+            Perex: this.state.Perex
         }
         fetch(`/edit`, {
             method: 'POST',
@@ -114,6 +106,10 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
                     </div>
                     <div className="input-wrapper">
                         <input placeholder="Author" type="text" name="Author" onChange={this.onChange} value={this.state.Author}/>
+                    </div>
+                    <div className="input-wrapper">
+                        <input placeholder="Perex" type="text" name="Perex" onChange={this.onChange}
+                               value={this.state.Perex}/>
                     </div>
                     <div className="input-wrapper">
                         <InputTag Items={this.state.Tags ? this.state.Tags : []} toggleState={(e, tags) => this.setState({Tags: tags})}/>

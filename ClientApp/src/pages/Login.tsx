@@ -49,23 +49,31 @@ class Login extends React.Component<MyState> {
         this.setState({[e.currentTarget.name]: e.currentTarget.value});
     };
     render(){
-    return (
-        <div className="main-wrapper">
-            <h1>Login to your account!</h1>
-            <form className="main-wrapper" onSubmit={this.submitNew}>
-                <div className="input-wrapper">
-                    <input placeholder="User Name" type="text" name="UserName" onChange={this.onChange} value={this.state.UserName}/>
+        if(!this.context.user.UserName)
+            return (
+                <div className="main-wrapper">
+                    <h1>Login to your account!</h1>
+                    <form className="main-wrapper" onSubmit={this.submitNew}>
+                        <div className="input-wrapper">
+                            <input placeholder="User Name" type="text" name="UserName" onChange={this.onChange} value={this.state.UserName}/>
+                        </div>
+                        <div className="input-wrapper">
+                            <input placeholder="Email" type="email" name="Email" onChange={this.onChange} value={this.state.Email}/>
+                        </div>
+                        <div className="input-wrapper">
+                            <input placeholder="Password" type="password" name="Password" onChange={this.onChange} value={this.state.Password}/>
+                        </div>
+                        <button type="submit" >Log in</button>
+                    </form>
                 </div>
-                <div className="input-wrapper">
-                    <input placeholder="Email" type="email" name="Email" onChange={this.onChange} value={this.state.Email}/>
+            );
+        else{
+            return (
+                <div className="main-wrapper" style={{width: "500px"}}>
+                    <button type="submit" onClick={()=>this.context.login({})}>Log out</button>
                 </div>
-                <div className="input-wrapper">
-                    <input placeholder="Password" type="password" name="Password" onChange={this.onChange} value={this.state.Password}/>
-                </div>
-                <button type="submit" >Log in</button>
-            </form>
-        </div>
-    );
+            )
+        }
     }
 }
 

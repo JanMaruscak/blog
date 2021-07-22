@@ -4,36 +4,13 @@ import {Link, match} from 'react-router-dom';
 interface DetailParams {
     id: string;
 }
-
-type Tag = {
-    id: number,
-    value: string
-}
 interface DetailsProps {
     required: string;
     match?: match<DetailParams>;
 }
-type MyState = {
-    Title?: string,
-    Tags?: Tag[],
-    Created?: Date,
-    ImgUrl?: string,
-    Text?: any,
-    Data?: ObjectData[],
-    Author?: string
-};
-type ObjectData = {
-    id: number,
-    title: string,
-    imgUrl: string,
-    created: Date,
-    tags: Tag[],
-    author: string
 
-}
-
-class Article extends React.Component<DetailsProps, MyState> {
-    state: MyState = {
+class Article extends React.Component<DetailsProps, StateArticle> {
+    state: StateArticle = {
         Title: "",
         Tags: [],
         Created: new Date(),

@@ -8,7 +8,6 @@ type MyState = {
 type ChildProps = {
     toggleState: (e: React.MouseEvent, tags: string[]) => void;
     Items: string[]
-// −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−^^^^^^^^^^^^^^^
 }
 
 
