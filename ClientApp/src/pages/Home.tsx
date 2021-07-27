@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ArticleCard} from "../components/ArticleCard";
 import {Link} from "react-router-dom";
 
@@ -8,13 +8,15 @@ function Home() {
     useEffect(() => {
         fetch("api/blogs", {
             method: "GET"
-        }).then(res => res.json()).then(data => setData(data))
-        console.log(Data)
-        if(Data && Data[0]){
-            let newDate = new Date(Data[0].created)
-            setDate(newDate)            
-        }
-    }, []);
+        }).then(res => res.json()).then(data => {
+            setData(data)
+            console.log(data)
+            if (data && data[0]) {
+                let newDate = new Date(data[0].created)
+                setDate(newDate)
+            }
+        })
+    }, [fetch]);
     if(Data && Data[0])
     return (
         <div className="main-wrapper">
@@ -35,10 +37,9 @@ function Home() {
                     </div>
 
                     <div className="articleInfo">
-                        {date && <time className="date"
-                                       dateTime={date.toDateString()}>{date.getDate()}.{date.getMonth()}.{date.getFullYear()}</time>
+                        {date && <time className="date" dateTime={date.toDateString()}>{date.getDate()}.{date.getMonth()+1}.{date.getFullYear()}{" "}</time>
                         }/
-                        {Data[0].author}           
+                        {" "+Data[0].author}           
                     </div>
                 </div>
             </div>
@@ -54,7 +55,7 @@ function Home() {
         </div>
     );
     else{
-        return <>Loading</>
+        return <div className="main-wrapper">Loading</div>
     }
 }
 

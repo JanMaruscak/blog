@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;    
 using Microsoft.Extensions.Configuration;    
 using Microsoft.IdentityModel.Tokens;    
-using System;    
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;    
 using System.Text;
+using blog.Migrations;
 using blog.Models;
 
 namespace blog.Controllers
@@ -54,11 +56,13 @@ namespace blog.Controllers
         private string GenerateJSONWebToken(User userInfo)    
         {    
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));    
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);    
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            var claims = new List<Claim> {new Claim("UserName", userInfo.Username), new Claim("Email", userInfo.Password)};
+            
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],    
                 _config["Jwt:Issuer"],    
-                null,    
+                claims,    
                 expires: DateTime.Now.AddMinutes(120),    
                 signingCredentials: credentials);    
 

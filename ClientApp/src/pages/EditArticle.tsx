@@ -1,21 +1,8 @@
-﻿import React from 'react'
+import React from 'react'
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {match} from 'react-router-dom';
 import InputTag from "../components/InputTag";
-import Article from "./ArticlePage";
-
-type MyState = {
-    Id?: number,
-    Title?: string,
-    Tags?: string[],
-    Created?: Date,
-    ImgUrl?: string,
-    Text?: any,
-    Data?: Article[],
-    Author?: string,
-    Perex?: string 
-};
 
 interface DetailParams {
     id: string;
@@ -25,8 +12,8 @@ interface DetailsProps {
     required: string;
     match?: match<DetailParams>;
 }
-class EditArticle extends React.Component<DetailsProps, MyState> {
-    state: MyState = {
+class EditArticle extends React.Component<DetailsProps, StateArticle> {
+    state: StateArticle = {
         Id: 0,
         Title: "",
         Tags: [],
@@ -36,21 +23,12 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
         Data: [],
         Author: "",
         Perex: ""
-
     }
 
     componentDidMount() {        
         fetch("/api/blogs/"+ this.props.match?.params.id, {
             method: "GET"
         }).then(res => res.json()).then(data => this.setState({Data: data}, () => {
-            //console.log(this.state.Data)
-            let newTags = []
-            console.log(data)
-            for (let i = 0; i < data.tags.length; i++) {
-                console.log(data.tags[i].value)
-                newTags.push(data.tags[i].value)
-            }
-            console.log(newTags)
             this.setState({
                 Id: data.id,
                 Title: data.title,
@@ -58,7 +36,7 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
                 ImgUrl: data.imgUrl,
                 Text: data.text,
                 Author: data.author,
-                Tags: newTags,
+                Tags: data.tags,
                 Perex: data.perex
             })
         }))
@@ -66,16 +44,12 @@ class EditArticle extends React.Component<DetailsProps, MyState> {
 
     editNew = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        let tagsObj = []
-        if (this.state.Tags)
-            for (let i = 0; i < this.state.Tags.length; i++) {
-                tagsObj.push({"Value": this.state.Tags[i]})
-            }
+        console.log(this.state.Tags)
         let info = {
             Id: this.state.Id,
             Title: this.state.Title,
             ImgUrl: this.state.ImgUrl,
-            Tags: tagsObj,
+            Tags: this.state.Tags,
             Created: new Date(),
             Author: this.state.Author,
             Text: this.state.Text,

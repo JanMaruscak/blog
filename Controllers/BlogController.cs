@@ -39,7 +39,7 @@ namespace blog.Controllers
             return article;
         }
 
-        [Route("/loll")]
+        [Route("/tag/{id}")]
         private async Task<ActionResult<Tag>> GetTag(int id)
         {
             var tag = await _context.Tags.FindAsync(id);
@@ -53,11 +53,9 @@ namespace blog.Controllers
         }
 
         [Route("/bytag/{tag}")]
-        public async Task<ActionResult<List<Article>>> GetTagsByTag(string tag)
+        public ActionResult<List<Article>> GetArticlesByTag(string tag)
         {
-            var articles = _context.Articles.Include(a => a.Tags).Where(a => a.Tags.Any(t => t.Value == tag)).ToList();
-
-            return articles;
+            return _context.Articles.Include(a => a.Tags).Where(a => a.Tags.Any(t => t.Value == tag)).ToList();
         }
 
 
@@ -120,6 +118,16 @@ namespace blog.Controllers
                 return null;
             }
 
+            foreach (var tag in article.Tags)
+            {
+                if (!_context.Tags.Any(x => x.Value == tag.Value))
+                {
+                    _context.Tags.Add(tag);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
             Article temp = _context.Articles.Include(x => x.Tags).First(x => x.Id == article.Id);
 
             List<int> IdsToRemove = new List<int>();
@@ -138,7 +146,6 @@ namespace blog.Controllers
 
             
             int done = 0;
-            IdsToRemove = new List<int>();
             var TagsToRemove = new List<string>();
             List<int> IdsToAdd = new List<int>();
             foreach (var tag in _context.Tags)

@@ -1,47 +1,30 @@
-﻿import React from 'react'
+import React from 'react'
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import InputTag from "../components/InputTag";
 
 
-type MyState = {
-    Title: string,
-    Tags: string[],
-    Created: Date,
-    ImgUrl: string,
-    Text: any,
-    Author: string,
-    Perex: string
-};
-
-class AddArticle extends React.Component<MyState>{ 
-    state : MyState = {
+class AddArticle extends React.Component<StateArticle>{ 
+    state : StateArticle = {
         Title: "",
         Tags: [],
         Created: new Date(),
         ImgUrl: "",
         Text: "",
         Author: "",
-        Perex: ""
-        
+        Perex: ""        
     }
     submitNew = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        let tagsObj = [
-        ]
-        for (let i = 0; i < this.state.Tags.length; i++) {
-            tagsObj.push({"Value":this.state.Tags[i]})
-        }
         let info = {
             Title: this.state.Title,
             ImgUrl: this.state.ImgUrl,
-            Tags: tagsObj,
+            Tags: this.state.Tags,
             Created: new Date(),
             Author: this.state.Author,
             Text: this.state.Text,
             Perex: this.state.Perex
         }
-        console.log(info)
         fetch(`/api/blogs`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -74,7 +57,7 @@ class AddArticle extends React.Component<MyState>{
                 </div>
                 <div className="input-wrapper">
                     <label>Tags:</label>
-                    <InputTag Items={this.state.Tags} toggleState={(e, tags) => this.setState({Tags:tags})} />
+                    <InputTag Items={this.state.Tags ? this.state.Tags : []} toggleState={(e, tags) => this.setState({Tags:tags})} />
                 </div>
                 <div className="input-wrapper">
                     <ReactQuill theme="snow" value={this.state.Text} onChange={(e) => this.setState({Text: e})}/>

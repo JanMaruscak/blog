@@ -1,37 +1,34 @@
-﻿import React, {createContext, useState, FC} from "react";
+import React, { createContext, useState, FC } from "react";
 
 export type UserContextType = {
-    user: IUser;
-    login: (User: IUser) => void;
-}
-
-const contextDefaultValues: UserContextType = {
-    user: {UserName:"",Password:"",EmailAddress:""},
-    login: () => {
-    }
+  user: IUser;
+  login: (User: IUser) => void;
 };
 
-export const UserContext = createContext<UserContextType>(
-    contextDefaultValues
-);
+const contextDefaultValues: UserContextType = {
+  user: { UserName: "", Password: "", EmailAddress: "" },
+  login: () => {},
+};
 
-const UserProvider: FC = ({children}) => {
-    const [user, setUser] = useState<IUser>(contextDefaultValues.user);
+export const UserContext = createContext<UserContextType>(contextDefaultValues);
 
-    const login = (newUser: IUser) => {
-        setUser(newUser)
-    };
+const UserProvider: FC = ({ children }) => {
+  const [user, setUser] = useState<IUser>(contextDefaultValues.user);
 
-    return (
-        <UserContext.Provider
-            value={{
-                user,
-                login
-            }}
-        >
-            {children}
-        </UserContext.Provider>
-    );
+  const login = (newUser: IUser) => {
+    setUser(newUser);
+  };
+
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        login,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default UserProvider;

@@ -1,19 +1,19 @@
-﻿export function TagToString(tag:Tag){
-    return tag.value;    
+export function TagToString(tag: Tag) {
+    return tag.value;
 }
-export function StringToTag(value:string){
+export function StringToTag(value: string) {
     return {
-        id: "",
+        id: 0,
         value: value
     }
 }
 
 export function TagsToStrings(tags: Tag[]) {
     let result: string[] = []
-    tags.map((tag)=>{
+    tags.map((tag) => {
         result.push(tag.value)
     })
-    return result    
+    return result
 }
 
 export function StringsToTags(values: string[]) {
@@ -21,8 +21,8 @@ export function StringsToTags(values: string[]) {
     values.map((value) => {
         result.push(
             {
-                value: value,
-                id: 0
+                id: 0,
+                value: value
             }
         )
     })
