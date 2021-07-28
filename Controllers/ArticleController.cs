@@ -4,28 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using blog.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 
 namespace blog.Controllers
 {
-    [Route("api/blogs")]
-    public class BlogController : ControllerBase
+    [Route("api/articles")]
+    public class ArticleController : ControllerBase
     {
         private readonly DbContext _context;
 
-        public BlogController(DbContext context)
+        public ArticleController(DbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Blogs
+        // GET: api/articles
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
         {
             return await _context.Articles.Include(x => x.Tags).ToListAsync();
         }
 
-        // GET: api/Blogs/5
+        // GET: api/articles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Article>> GetArticle(int id)
         {
@@ -57,10 +58,10 @@ namespace blog.Controllers
         {
             return _context.Articles.Include(a => a.Tags).Where(a => a.Tags.Any(t => t.Value == tag)).ToList();
         }
-
-
-        // GET: api/Blogs
+        
+        // POST: api/articles
         [HttpPost]
+        [Route("post")]
         public async Task<ActionResult<Article>> PostArticle([FromBody] Article article)
         {
             if (article == null)
@@ -108,9 +109,9 @@ namespace blog.Controllers
             return CreatedAtAction("GetArticle", new { id = article.Id }, article);
         }
 
-        // GET: api/Blogs/edit
+        // POST: api/articles/edit
         [HttpPost]
-        [Route("/edit")]
+        [Route("edit")]
         public async Task<ActionResult<Article>> EditArticle([FromBody] Article article)
         {
             if (article == null)
@@ -186,7 +187,7 @@ namespace blog.Controllers
             return CreatedAtAction("GetArticle", new {id = article.Id}, article);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("remove")]
         public async Task RemoveArticle(int id)
         {
             var article = GetArticle(id).Result.Value;

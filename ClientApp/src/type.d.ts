@@ -1,4 +1,4 @@
-﻿interface IUser{
+﻿interface IUser {
     UserName: string | undefined,
     Password: string | undefined,
     EmailAddress: string | undefined
@@ -14,7 +14,7 @@ type Tag = {
     id: number,
     value: string
 }
-type Article={
+type Article = {
     id: number,
     title: string,
     tags: Tag[],
@@ -22,6 +22,18 @@ type Article={
     imgUrl: string,
     author: string,
     perex: string
+}
+const ArticleDefault = {
+    id: 0,
+    title: "",
+    tags: [],
+    created: new Date(),
+    imgUrl: "",
+    author: "",
+    perex: ""
+}
+type Articles = {
+    Data: Article[]
 }
 type StateArticle = {
     Id?: number,
