@@ -11,6 +11,7 @@ import AddArticle from "../pages/AddArticle";
 import NotFound from "../pages/NotFound";
 import Footer from "./Footer";
 import {UserContext} from "../context/UserContext";
+import Search from "../pages/Search";
 
 function App() {
     const {user} = useContext(UserContext);
@@ -25,6 +26,7 @@ function App() {
                             <Route exact path="/latest" component={Latest}/>
                             <Route exact path="/browse" component={Browse}/>
                             <Route exact path="/login" component={Login}/>
+                            <Route exact path="/search" component={Search}/>
                             <Route exact path="/article/:id" component={ArticlePage}/>
                             <Route exact path="/editArticle/:id" component={EditArticle}/>
                             <Route exact path="/addArticle" component={AddArticle}/>
@@ -46,6 +48,7 @@ function App() {
                             <Route exact path="/latest" component={Latest}/>
                             <Route exact path="/browse" component={Browse}/>
                             <Route exact path="/login" component={Login}/>
+                            <Route exact path="/search" component={Search}/>
                             <Route exact path="/article/:id" component={ArticlePage}/>
                             <Route component={NotFound}/>
                         </Switch>

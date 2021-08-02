@@ -9,6 +9,9 @@ namespace blog.Models
         public string Password { get; set; }
         [Key]
         public string EmailAddress { get; set; }
+        /// <summary>
+        /// Date of account creation
+        /// </summary>
         public DateTime Created { get; set; }
     }
 }

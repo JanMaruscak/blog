@@ -19,13 +19,31 @@ namespace blog.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Get all articles
+        /// </summary>
+        /// <param name="id">Id článku</param>
+        /// <returns>Detail článku</returns>
         // GET: api/articles
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
         {
             return await _context.Articles.Include(x => x.Tags).ToListAsync();
+        } 
+
+        // Post: api/articles/query
+        [HttpPost("query")]
+        public async Task<ActionResult<IEnumerable<Article>>> GetArticlesByQuery([FromBody] string query)
+        {
+            var result = _context.Articles.Include(x => x.Tags).Where(x => x.Title.Contains(query));
+            return result.ToList();
         }
 
+        /// <summary>
+        /// Get article
+        /// </summary>
+        /// <param name="id">Id článku</param>
+        /// <returns>Detail článku</returns>
         // GET: api/articles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Article>> GetArticle(int id)
@@ -41,6 +59,7 @@ namespace blog.Controllers
         }
 
         [Route("/tag/{id}")]
+        [HttpGet]
         private async Task<ActionResult<Tag>> GetTag(int id)
         {
             var tag = await _context.Tags.FindAsync(id);
@@ -53,12 +72,22 @@ namespace blog.Controllers
             return tag;
         }
 
+        /// <summary>
+        /// Get articles by tag
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         [Route("/bytag/{tag}")]
+        [HttpGet]
         public ActionResult<List<Article>> GetArticlesByTag(string tag)
         {
             return _context.Articles.Include(a => a.Tags).Where(a => a.Tags.Any(t => t.Value == tag)).ToList();
         }
-        
+
+        /// <summary>
+        /// Post article
+        /// </summary>
+        /// <returns></returns>
         // POST: api/articles
         [HttpPost]
         [Route("post")]
@@ -109,6 +138,11 @@ namespace blog.Controllers
             return CreatedAtAction("GetArticle", new { id = article.Id }, article);
         }
 
+        /// <summary>
+        /// Edit article
+        /// </summary>
+        /// <param name="id">Id článku</param>
+        /// <returns>Detail článku</returns>
         // POST: api/articles/edit
         [HttpPost]
         [Route("edit")]
@@ -187,8 +221,15 @@ namespace blog.Controllers
             return CreatedAtAction("GetArticle", new {id = article.Id}, article);
         }
 
-        [HttpPost("remove")]
-        public async Task RemoveArticle(int id)
+        /// <summary>
+        /// Remove article
+        /// </summary>
+        /// <param name="id">Id článku</param>
+        /// <returns></returns>
+        // POST: api/articles/remove
+        [HttpPost]
+        [Route("remove")]
+        public async Task RemoveArticle([FromBody] int id)
         {
             var article = GetArticle(id).Result.Value;
             _context.Articles.Remove(article);

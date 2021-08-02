@@ -20,6 +20,9 @@ function Navbar() {
                 <NavLink to="/login" activeClassName="is-active">
                     Login
                 </NavLink>
+                <NavLink to="/search" activeClassName="is-active">
+                    Search
+                </NavLink>
                 <NavLink to="/addArticle" activeClassName="is-active">
                     AddArticle
                 </NavLink>
@@ -37,8 +40,8 @@ function Navbar() {
                 <NavLink to="/browse" activeClassName="is-active">
                     Browse
                 </NavLink>
-                <NavLink to="/login" activeClassName="is-active">
-                    Login
+                <NavLink to="/search" activeClassName="is-active">
+                    Search
                 </NavLink>
             </nav>
         );

@@ -58,6 +58,10 @@ class EditArticle extends React.Component<DetailsProps, StateArticle> {
     onChange = (e: React.FormEvent<HTMLInputElement>): void => {
         this.setState({[e.currentTarget.name]: e.currentTarget.value});
     };
+    removeArticle() {
+        console.log("suck cock")
+        fetchJson("api/articles/remove", "post", this.state.Id).then(r => console.log(r))
+    }
 
     render() {
         return (
@@ -89,6 +93,7 @@ class EditArticle extends React.Component<DetailsProps, StateArticle> {
                     </div>
                     <button type="submit">Edit article</button>
                 </form>
+                <button type="button" onClick={()=>this.removeArticle()}>REMOVE ARTICLE</button>
             </div>)
     }
 }
